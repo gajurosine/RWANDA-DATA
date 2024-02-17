@@ -1,14 +1,22 @@
-const express = require('express');
-const path = require('path');
-const app = express();
-const port = 3000;
 
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'admindata.html'));
-});
+// admindata.js
+import { Provinces, Districts, Sectors, Villages } from "rwanda";
 
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
-});
+const provinces = Provinces();
+const districts = Districts();
+const sectors = Sectors();
+const villages = Villages();
+
+// Assuming there's an HTML element with the ID 'result'
+document.getElementById('result').innerHTML = `
+<h2>Provinces:</h2>
+<ul>${provinces.map(province => `<li>${province}</li>`).join('')}</ul>
+<h2>Districts:</h2>
+<ul>${districts.map(district => `<li>${district}</li>`).join('')}</ul>
+
+<h2>Districts:</h2>
+<ul>${sectors.map(sector=> `<li>${sector}</li>`).join('')}</ul>
+<h2>Districts:</h2>
+<ul>${villages.map(village=> `<li>${village}</li>`).join('')}</ul>
+`;
